@@ -8,24 +8,27 @@ The application allows creating, editing, opening and saving text files in a lig
 
 ## Features
 
-* Create a new text document
-* Open existing `.txt` files
-* Save and Save As functionality
-* Undo / Redo support
-* Cut, Copy and Paste operations
-* Font selection
-* Text color selection
-* Keyboard shortcuts
-* Warning when closing with unsaved changes
+- Create a new document
+- Open existing `.txt` files
+- Save files
+- Save files with **Save As**
+- Undo, Cut, Copy, Paste
+- Delete selected text
+- Select all text
+- Font customization
+- Background color customization
+- Status bar with line, column and character count
+- Warning when closing with unsaved changes
+- Keyboard shortcut for **Ctrl+A**
 
 ---
 
 ## Technologies
 
-* C#
-* .NET Framework
-* Windows Forms
-* Visual Studio
+- C#
+- .NET Framework
+- Windows Forms
+- Visual Studio
 
 ---
 
@@ -37,32 +40,22 @@ The application allows creating, editing, opening and saving text files in a lig
 
 ## How to run
 
-1. Clone the repository:
-
-```
-git clone https://github.com/krystianmarciniak/notepad-clone.git
-```
-
-2. Open the solution file in **Visual Studio**
-
-```
-Notepad.sln
-```
-
-3. Build and run the application.
+1. Clone the repository
+2. Open the solution in **Visual Studio**
+3. Build and run the project
 
 ---
 
 ## Project purpose
 
-This project was created as part of learning **C# desktop application development with Windows Forms**.
+This project was created as part of learning desktop application development in **C# with Windows Forms**.
 
-It demonstrates handling of:
-
-* file operations
-* text editing
-* UI events
-* basic application state management
+It demonstrates:
+- file operations
+- text editing features
+- menu handling
+- dialogs
+- application state management
 
 ---
 
