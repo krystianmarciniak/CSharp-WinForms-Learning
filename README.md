@@ -36,9 +36,9 @@ Features:
 * reset button
 
 | Project | Description |
-|-------|-------------|
-| Notepad Clone | Simple text editor [View project](notepad-clone)|
-| RGB Color Picker | RGB color selection tool [View project](rgb-color-picker)|
+|--------|-------------|
+| Notepad Clone | Simple text editor [View project](notepad-clone) |
+| RGB Color Picker | RGB color selection tool [View project](rgb-color-picker) |
 | Drag & Drop ListBox | Demonstrates drag & drop between lists [View project](DragAndDropLists) |
 
-### Drag & Drop ListBox
+
