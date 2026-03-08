@@ -37,9 +37,8 @@ Features:
 
 | Project | Description |
 |-------|-------------|
-| Notepad Clone | Simple text editor |
-| RGB Color Picker | RGB color selection tool |
-| Drag & Drop ListBox | Demonstrates drag & drop between lists |
+| Notepad Clone | Simple text editor [View project](notepad-clone)|
+| RGB Color Picker | RGB color selection tool [View project](rgb-color-picker)|
+| Drag & Drop ListBox | Demonstrates drag & drop between lists [View project](DragAndDropLists) |
 
 ### Drag & Drop ListBox
-[View project](DragAndDropLists)
