@@ -26,6 +26,7 @@
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.listBox1 = new System.Windows.Forms.ListBox();
       this.listBox2 = new System.Windows.Forms.ListBox();
+      this.buttonReset = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -44,6 +45,7 @@
       // 
       // splitContainer1.Panel2
       // 
+      this.splitContainer1.Panel2.Controls.Add(this.buttonReset);
       this.splitContainer1.Panel2.Controls.Add(this.listBox2);
       this.splitContainer1.Size = new System.Drawing.Size(1156, 619);
       this.splitContainer1.SplitterDistance = 572;
@@ -67,6 +69,7 @@
             "Element 10"});
       this.listBox1.Location = new System.Drawing.Point(0, 0);
       this.listBox1.Name = "listBox1";
+      this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
       this.listBox1.Size = new System.Drawing.Size(572, 619);
       this.listBox1.TabIndex = 0;
       // 
@@ -88,8 +91,19 @@
             "Pozycja J"});
       this.listBox2.Location = new System.Drawing.Point(0, 0);
       this.listBox2.Name = "listBox2";
+      this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
       this.listBox2.Size = new System.Drawing.Size(580, 619);
       this.listBox2.TabIndex = 0;
+      // 
+      // buttonReset
+      // 
+      this.buttonReset.Location = new System.Drawing.Point(451, 21);
+      this.buttonReset.Name = "buttonReset";
+      this.buttonReset.Size = new System.Drawing.Size(75, 23);
+      this.buttonReset.TabIndex = 1;
+      this.buttonReset.Text = "Reset";
+      this.buttonReset.UseVisualStyleBackColor = true;
+      this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
       // 
       // Form1
       // 
@@ -112,6 +126,7 @@
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.ListBox listBox1;
     private System.Windows.Forms.ListBox listBox2;
+    private System.Windows.Forms.Button buttonReset;
     }
   }
 

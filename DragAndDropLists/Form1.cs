@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DragAndDropLists {
   public partial class Form1:Form {
     private ListBox dragDropSource;
-
+    private List<string> dragDropItems = new List<string>();
     public Form1() {
       InitializeComponent();
 
@@ -39,10 +39,17 @@ namespace DragAndDropLists {
       if(index==ListBox.NoMatches)
         return;
 
-      dragDropSource=listBox;
-      string item = listBox.Items[index].ToString();
+      if(listBox.SelectedItems.Count==0)
+        return;
 
-      listBox.DoDragDrop(item,DragDropEffects.Copy|DragDropEffects.Move);
+      dragDropSource=listBox;
+      dragDropItems=new List<string>();
+
+      foreach(var selectedItem in listBox.SelectedItems) {
+        dragDropItems.Add(selectedItem.ToString());
+        }
+
+      listBox.DoDragDrop(dragDropItems,DragDropEffects.Copy|DragDropEffects.Move);
       }
 
     private void ListBox_DragOver(object sender,DragEventArgs e) {
@@ -63,7 +70,7 @@ namespace DragAndDropLists {
         return;
         }
 
-      if(e.Data.GetDataPresent(DataFormats.StringFormat)) {
+      if(e.Data.GetDataPresent(typeof(List<string>))) {
         if((e.KeyState&8)==8)
           e.Effect=DragDropEffects.Copy;
         else
@@ -79,16 +86,61 @@ namespace DragAndDropLists {
       if(targetListBox==null)
         return;
 
-      if(!e.Data.GetDataPresent(DataFormats.StringFormat))
+      if(!e.Data.GetDataPresent(typeof(List<string>)))
         return;
 
-      string item = (string)e.Data.GetData(DataFormats.StringFormat);
+      List<string> items = (List<string>)e.Data.GetData(typeof(List<string>));
 
-      targetListBox.Items.Add(item);
+      Point point = targetListBox.PointToClient(new Point(e.X,e.Y));
+      int index = targetListBox.IndexFromPoint(point);
+
+      if(index==ListBox.NoMatches)
+        index=targetListBox.Items.Count;
+
+      foreach(string item in items) {
+        targetListBox.Items.Insert(index,item);
+        index++;
+        }
 
       if(e.Effect==DragDropEffects.Move&&dragDropSource!=null) {
-        dragDropSource.Items.Remove(item);
+        foreach(string item in items) {
+          dragDropSource.Items.Remove(item);
+          }
         }
+      }
+
+    private void buttonReset_Click(object sender,EventArgs e) {
+      listBox1.Items.Clear();
+      listBox2.Items.Clear();
+
+      listBox1.Items.AddRange(new object[] {
+    "Element 1",
+    "Element 2",
+    "Element 3",
+    "Element 4",
+    "Element 5",
+    "Element 6",
+    "Element 7",
+    "Element 8",
+    "Element 9",
+    "Element 10"
+  });
+
+      listBox2.Items.AddRange(new object[] {
+    "Pozycja A",
+    "Pozycja B",
+    "Pozycja C",
+    "Pozycja D",
+    "Pozycja E",
+    "Pozycja F",
+    "Pozycja G",
+    "Pozycja H",
+    "Pozycja I",
+    "Pozycja J"
+  });
+
+      dragDropSource=null;
+      dragDropItems.Clear();
       }
     }
   }
