@@ -1,5 +1,10 @@
 # C# WinForms Learning
 
+![Language](https://img.shields.io/badge/language-C%23-blue)
+![Framework](https://img.shields.io/badge/framework-Windows%20Forms-blueviolet)
+![Projects](https://img.shields.io/badge/projects-3-orange)
+![Status](https://img.shields.io/badge/status-learning-green)
+
 Collection of Windows Forms applications created while learning C# and desktop development.
 
 ## Projects
