@@ -1,0 +1,49 @@
+# Visual Studio cache
+.vs/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+
+# Visual Studio temporary files
+*.cache
+*.log
+
+# Debug files
+*.pdb
+*.ilk
+
+# Executables
+*.exe
+*.dll
+
+# NuGet packages
+packages/
+
+# Visual Studio Code settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider / JetBrains
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test results
+TestResults/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap

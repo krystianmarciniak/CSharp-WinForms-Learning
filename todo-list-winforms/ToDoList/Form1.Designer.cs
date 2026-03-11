@@ -33,6 +33,8 @@
       this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.tasksStatusLabel = new System.Windows.Forms.StatusStrip();
+      this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this.deleteButton = new System.Windows.Forms.Button();
       this.newButton = new System.Windows.Forms.Button();
       this.descriptionTextBox = new System.Windows.Forms.TextBox();
@@ -46,6 +48,7 @@
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
       this.menuStrip1.SuspendLayout();
+      this.tasksStatusLabel.SuspendLayout();
       this.SuspendLayout();
       // 
       // splitContainer1
@@ -62,6 +65,7 @@
       // 
       // splitContainer1.Panel2
       // 
+      this.splitContainer1.Panel2.Controls.Add(this.tasksStatusLabel);
       this.splitContainer1.Panel2.Controls.Add(this.deleteButton);
       this.splitContainer1.Panel2.Controls.Add(this.newButton);
       this.splitContainer1.Panel2.Controls.Add(this.descriptionTextBox);
@@ -90,7 +94,7 @@
       this.entriesListView.TabIndex = 1;
       this.entriesListView.UseCompatibleStateImageBehavior = false;
       this.entriesListView.View = System.Windows.Forms.View.Details;
-      this.entriesListView.Click += new System.EventHandler(this.entriesListView_SelectedIndexChanged);
+      this.entriesListView.SelectedIndexChanged += new System.EventHandler(this.entriesListView_SelectedIndexChanged);
       // 
       // columnHeader1
       // 
@@ -121,32 +125,52 @@
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
       this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
-      this.plikToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+      this.plikToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
       this.plikToolStripMenuItem.Text = "Plik";
       // 
       // newToolStripMenuItem
       // 
       this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-      this.newToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+      this.newToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
       this.newToolStripMenuItem.Text = "Nowy";
+      this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
       // 
       // loadToolStripMenuItem
       // 
       this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-      this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+      this.loadToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
       this.loadToolStripMenuItem.Text = "Wczytaj";
+      this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
       // 
       // saveToolStripMenuItem
       // 
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-      this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+      this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
       this.saveToolStripMenuItem.Text = "Zapisz";
+      this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
       // 
       // exitToolStripMenuItem
       // 
       this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-      this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+      this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
       this.exitToolStripMenuItem.Text = "Zakończ";
+      this.exitToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+      // 
+      // tasksStatusLabel
+      // 
+      this.tasksStatusLabel.ImageScalingSize = new System.Drawing.Size(20, 20);
+      this.tasksStatusLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+      this.tasksStatusLabel.Location = new System.Drawing.Point(0, 246);
+      this.tasksStatusLabel.Name = "tasksStatusLabel";
+      this.tasksStatusLabel.Size = new System.Drawing.Size(882, 26);
+      this.tasksStatusLabel.TabIndex = 10;
+      // 
+      // statusLabel
+      // 
+      this.statusLabel.Name = "statusLabel";
+      this.statusLabel.Size = new System.Drawing.Size(57, 20);
+      this.statusLabel.Text = "Tasks: 0";
       // 
       // deleteButton
       // 
@@ -179,6 +203,7 @@
       this.descriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
       this.descriptionTextBox.Size = new System.Drawing.Size(438, 100);
       this.descriptionTextBox.TabIndex = 7;
+      this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
       // 
       // descriptionLabel
       // 
@@ -205,6 +230,7 @@
       this.dueDatePicker.Name = "dueDatePicker";
       this.dueDatePicker.Size = new System.Drawing.Size(200, 22);
       this.dueDatePicker.TabIndex = 3;
+      this.dueDatePicker.ValueChanged += new System.EventHandler(this.dueDatePicker_ValueChanged);
       // 
       // titleTextBox
       // 
@@ -214,6 +240,7 @@
       this.titleTextBox.Name = "titleTextBox";
       this.titleTextBox.Size = new System.Drawing.Size(250, 22);
       this.titleTextBox.TabIndex = 1;
+      this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
       // 
       // titleLabel
       // 
@@ -242,6 +269,8 @@
       this.splitContainer1.ResumeLayout(false);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
+      this.tasksStatusLabel.ResumeLayout(false);
+      this.tasksStatusLabel.PerformLayout();
       this.ResumeLayout(false);
 
       }
@@ -265,6 +294,8 @@
     private System.Windows.Forms.TextBox descriptionTextBox;
     private System.Windows.Forms.Button deleteButton;
     private System.Windows.Forms.Button newButton;
+    private System.Windows.Forms.StatusStrip tasksStatusLabel;
+    private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
   }
 

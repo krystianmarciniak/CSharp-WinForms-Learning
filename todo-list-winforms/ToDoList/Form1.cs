@@ -23,13 +23,22 @@ namespace ToDoList {
       entriesListView.MultiSelect = false;
       entriesListView.HideSelection = false;
       entriesListView.View = View.Details;
+      entriesListView.KeyDown += EntriesListView_KeyDown;
+      entriesListView.GridLines = true;
 
       this.FormClosing += Form1_FormClosing;
-
-      exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+      this.Load += Form1_Load;
+      this.KeyPreview = true;
 
       RefreshEntriesListView();
       UpdateTitle();
+
+      if(Properties.Settings.Default.WindowWidth > 0) {
+        this.Width = Properties.Settings.Default.WindowWidth;
+        this.Height = Properties.Settings.Default.WindowHeight;
+        this.Left = Properties.Settings.Default.WindowX;
+        this.Top = Properties.Settings.Default.WindowY;
+        }
       }
     private void RefreshEntriesListView() {
       entriesListView.Items.Clear();
@@ -41,6 +50,9 @@ namespace ToDoList {
 
         entriesListView.Items.Add(item);
         }
+      UpdateStatusBar();
+      entriesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+      entriesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
       }
     private void UpdateTitle() {
       string fileName = string.IsNullOrEmpty(_currentFilePath)
@@ -129,10 +141,21 @@ namespace ToDoList {
           MessageBoxIcon.Question);
 
       if(result == DialogResult.Yes) {
+
+        int index = entriesListView.SelectedIndices[0];
         _entries.Remove(selectedEntry);
         MarkAsModified();
-        ClearEditor();
+
+        if(entriesListView.Items.Count > 0) {
+          if(index >= entriesListView.Items.Count)
+            index = entriesListView.Items.Count - 1;
+
+          entriesListView.Items[index].Selected = true;
+          } else {
+          ClearEditor();
+          }
         }
+
       }
     private void entriesListView_SelectedIndexChanged(object sender,EventArgs e) {
       ToDoEntry selectedEntry = GetSelectedEntry();
@@ -211,15 +234,26 @@ namespace ToDoList {
       if(!_isModified)
         return;
 
-      DialogResult result = MessageBox.Show(
-          "Masz niezapisane zmiany. Czy na pewno chcesz zamknąć program?",
-          "Niezapisane zmiany",
-          MessageBoxButtons.YesNo,
-          MessageBoxIcon.Warning);
+      if(!string.IsNullOrEmpty(_currentFilePath)) {
+        SaveToFile(_currentFilePath);
+        } else {
+        DialogResult result = MessageBox.Show(
+            "Masz niezapisane zmiany. Czy na pewno chcesz zamknąć program?",
+            "Niezapisane zmiany",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning);
 
-      if(result == DialogResult.No) {
-        e.Cancel = true;
+        if(result == DialogResult.No) {
+          e.Cancel = true;
+          return;
+          }
         }
+      Properties.Settings.Default.WindowWidth = this.Width;
+      Properties.Settings.Default.WindowHeight = this.Height;
+      Properties.Settings.Default.WindowX = this.Left;
+      Properties.Settings.Default.WindowY = this.Top;
+
+      Properties.Settings.Default.Save();
       }
     private void SaveToFile(string filePath) {
       try {
@@ -241,9 +275,7 @@ namespace ToDoList {
     private void LoadFromFile(string filePath) {
       try {
         string json = File.ReadAllText(filePath);
-
         List<ToDoEntry> loadedEntries = JsonConvert.DeserializeObject<List<ToDoEntry>>(json);
-
         _entries.Clear();
 
         if(loadedEntries != null) {
@@ -251,18 +283,18 @@ namespace ToDoList {
             _entries.Add(entry);
             }
           }
-
         _currentFilePath = filePath;
         _isModified = false;
-
+        this.Text = "ToDo List - " + Path.GetFileName(_currentFilePath);
         RefreshEntriesListView();
+        ClearEditor();
         UpdateTitle();
+
         } catch(Exception ex) {
         MessageBox.Show(
             "Błąd podczas wczytywania pliku:\n" + ex.Message,
             "Błąd wczytywania",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Error);
+            MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
       }
     private void saveToolStripMenuItem_Click(object sender,EventArgs e) {
@@ -270,6 +302,7 @@ namespace ToDoList {
         SaveFileDialog dialog = new SaveFileDialog();
         dialog.Filter = "JSON files (*.json)|*.json";
         dialog.Title = "Zapisz listę zadań";
+        dialog.FileName = "tasks.json";
 
         if(dialog.ShowDialog() == DialogResult.OK) {
           SaveToFile(dialog.FileName);
@@ -285,8 +318,29 @@ namespace ToDoList {
 
       if(dialog.ShowDialog() == DialogResult.OK) {
         LoadFromFile(dialog.FileName);
+        _currentFilePath = dialog.FileName;
         }
       }
+    private void Form1_Load(object sender,EventArgs e) {
+      titleTextBox.Focus();
+      titleTextBox.SelectAll();
+      }
+    private void UpdateStatusBar() {
+      statusLabel.Text = $"Tasks: {_entries.Count}";
+      }
+    private void EntriesListView_KeyDown(object sender,KeyEventArgs e) {
+      if(e.KeyCode == Keys.Delete) {
+        DeleteSelectedEntry();
+        }
+      }
+    private void DeleteSelectedEntry() {
+      if(entriesListView.SelectedIndices.Count == 0)
+        return;
 
+      int index = entriesListView.SelectedIndices[0];
+      _entries.RemoveAt(index);
+      RefreshEntriesListView();
+      _isModified = true;
+      }
     }
   }
