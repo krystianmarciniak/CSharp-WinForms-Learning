@@ -8,9 +8,10 @@
 Simple Windows Forms application for managing tasks.
 
 ## Demo
-```
+
 ![ToDoList demo](demo.gif)
 
+```
 +---------------------+
 | Form1 UI |
 | ListView, inputs |
@@ -37,3 +38,14 @@ Simple Windows Forms application for managing tasks.
 | save / load |
 +---------------------+
 ```
+
+## Running the application
+
+1. Download or clone the repository.
+2. Open `ToDoList.sln` in Visual Studio.
+3. Build the solution.
+4. Start the application.
+
+## Author
+
+Krystian Marciniak
