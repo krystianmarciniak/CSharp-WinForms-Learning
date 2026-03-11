@@ -8,7 +8,7 @@
 Simple Windows Forms application for managing tasks.
 
 ## Demo
-
+```
 ![ToDoList demo](demo.gif)
 
 +---------------------+
@@ -36,3 +36,4 @@ Simple Windows Forms application for managing tasks.
 | JSON file |
 | save / load |
 +---------------------+
+```
